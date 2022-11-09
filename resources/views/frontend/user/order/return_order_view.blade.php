@@ -1,0 +1,123 @@
+@extends('frontend.main_master')
+@section('content')
+<div class="body-container" style="margin-top:100px">
+    <div class="container profile-update-container" >
+   
+        <div class="row row-profile-form ">
+       @include('frontend.common.user_sidebar')
+
+     
+
+       <div class="col-md-8 order-table-card">
+
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+  
+              <tr style="background: #e2e2e2;">
+                <td class="col-md-1">
+                  <label for=""> Date</label>
+                </td>
+
+                <td class="col-md-3">
+                  <label for=""> Total</label>
+                </td>
+
+                <td class="col-md-3">
+                  <label for=""> Payment</label>
+                </td>
+
+
+                <td class="col-md-2">
+                  <label for=""> Invoice</label>
+                </td>
+
+                 <td class="col-md-1">
+                    <label for=""> Order Reason </label>
+                </td>
+
+                 <td class="col-md-2">
+                  <label for=""> Order Status</label>
+                </td>
+
+                
+                
+              </tr>
+
+
+              @forelse($orders as $order)
+       <tr>
+                <td class="col-md-1">
+                  <label for=""> {{ $order->order_date }}</label>
+                </td>
+
+                <td class="col-md-3">
+                  <label for=""> ₹{{ $order->amount }}</label>
+                </td>
+
+
+                 <td class="col-md-3">
+                  <label for=""> {{ $order->payment_method }}</label>
+                </td>
+
+                <td class="col-md-2">
+                  <label for=""> {{ $order->invoice_no }}</label>
+                </td>
+
+                 <td class="col-md-2">
+                   <label for=""> {{ $order->return_reason }}</label>
+                </td>
+
+                 <td class="col-md-2">
+                  <label for=""> 
+
+   @if($order->return_order == 0) 
+ <span class="badge badge-pill badge-warning" style="background: #418DB9;"> No Return Request </span>
+ @elseif($order->return_order == 1)
+ <span class="badge badge-pill badge-warning" style="background: #800080;"> Pending </span>
+ <span class="badge badge-pill badge-warning" style="background:red;">Return Requested </span>
+
+ @elseif($order->return_order == 2)
+  <span class="badge badge-pill badge-warning" style="background: #008000;">Success </span>
+  @endif
+                    
+
+                    </label>
+                </td>
+
+         
+                
+              </tr>
+              @empty
+              <h4 class="text-danger">Order Not Found</h4>
+
+              @endforelse
+
+
+
+
+
+            </tbody>
+            
+          </table>
+          
+        </div>
+
+
+
+
+         
+       </div> <!-- / end col md 8 -->
+
+     
+
+     
+      
+    </div> <!-- // end row -->
+    
+  </div>
+  
+</div>
+ 
+
+@endsection
